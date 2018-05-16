@@ -1,0 +1,84 @@
+<?XML VERSION="1.0"?>
+<CHANNEL>
+   <WWITEM HREF="http://example.microsoft.com/desktopitem.htm">
+      <TITLE>Towercam</TITLE>
+      <USAGE VALUE="DesktopComponent">
+         <WIDTH VALUE="352" />
+         <HEIGHT VALUE="288" />
+      </USAGE>
+   </WWITEM>
+</CHANNEL>
+<html>
+	<head>
+		<title>Towercam</title>
+		<meta name="author" content="George Hafiz, george.hafiz -.at.- baesystems.com" />
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<script type="text/javascript">
+			var now = new Date();
+			var hrs = now.getHours();
+			var mns = now.getMinutes();
+			var sec = now.getSeconds();
+			
+			function init() {
+				setInterval('displaytime()', 1000);
+			}
+			function addonload(myfunc) {
+				if(window.addEventListener)
+				window.addEventListener('load', myfunc, false);
+				else if(window.attachEvent)
+				window.attachEvent('onload', myfunc);
+			}
+			function displaytime(){
+				// tick the clock and refresh if probably new image
+				now.setSeconds(now.getSeconds()+1);
+				if( (now.getMinutes()%5 == 0) && (now.getSeconds() >= 55) ) {
+					window.location.reload();
+				} else {
+					var timestring=pad(now.getHours(),2)+":"+pad(now.getMinutes(),2);
+					document.getElementById('timestamp').innerHTML=timestring;
+				}
+			}
+			function pad(number, length) {
+				 var str = '' + number;
+				 while (str.length < length) {
+					 str = '0' + str;
+				 }
+				 return str;
+			}
+		</script>
+	</head>
+	<style type="text/css">
+		* {
+		margin:0px;
+		padding:0px;
+		}
+		html,body {
+		width:352px;
+		height:288px;
+		overflow:hidden;
+		}
+		#timestamp {
+		color: white;
+		font-size: 12px;
+		text-align: right;
+		}
+		#tower {
+		display: block;
+		width: 352px;
+		height: 288px;
+		background-image: url('http://www.forms.portsmouth.gov.uk/webcam/tower.jpg');
+		}
+		#loading {
+		width: 352px;
+		margin: 0 auto;
+		text-align:center;
+		}
+        </style>
+	<body onload="init();">
+	<div id="tower">
+		<div id="timestamp">NO:JS</div>
+	</div>
+	</body>
+</html>
